@@ -12,12 +12,12 @@
 #include <algorithm>
 #include "gameObject.h"
 #include "hashMap.h"
-#include "RBTree.h"
+//#include "RBTree.h"
 
 using namespace std;
 
 void ReadFileHashMap(const char* filename, HashMap &map, set<string> &genre);
-void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre);
+//void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre);
 gameObject CreateObj(string &lineFromFile);
 void printDecendingOrderHM(string targetGenre, HashMap &map);
 bool checkInteger(string str);
@@ -46,8 +46,8 @@ int main() {
 
     HashMap myHashMap;
     ReadFileHashMap(file2, myHashMap, genres);
-    RBTree myRBTree;
-    ReadFileRBTree(file2, myRBTree, genres);
+//    RBTree myRBTree;
+//    ReadFileRBTree(file2, myRBTree, genres);
     bool weContinue = true;
     while (weContinue) {
         cout << endl << "Type one of the following numbers to browse the games from that genre. Type -1 to exit the program." << endl << endl;
@@ -139,15 +139,15 @@ int main() {
                 }
             }
             else { // if retrieving through red-black tree
-                if (!myRBTree.search(choice)) {
-                    cout << "No game was found with that AppID. Try again." << endl;
-                }
-                else {
-                    auto tempRB = myRBTree.search(choice);
-                    blanky = tempRB->game;
-                    blanky.PrintStats();
-                    cout << endl;
-                }
+//                if (!myRBTree.search(choice)) {
+//                    cout << "No game was found with that AppID. Try again." << endl;
+//                }
+//                else {
+//                    auto tempRB = myRBTree.search(choice);
+//                    blanky = tempRB->game;
+//                    blanky.PrintStats();
+//                    cout << endl;
+//                }
             }
 
 
@@ -336,24 +336,24 @@ void ReadFileHashMap(const char* filename, HashMap &map, set<string> &genre) {
     }
 }
 
-void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre) {
-    // Read the file, create and store some game objects
-    string lineFromFile;
-    ifstream file;
-
-    if(file.is_open()) {
-        cout << "da file is open" << endl;
-    }
-    file.open(filename);
-
-    getline(file, lineFromFile); // get the template line out of the way
-
-    if (file.is_open()) {
-        while (getline(file, lineFromFile)) {
-            if (!lineFromFile.empty()) {
-                gameObject obj = CreateObj(lineFromFile);
-                map.insert(obj._appid, obj);
-            }
-        }
-    }
-}
+//void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre) {
+//    // Read the file, create and store some game objects
+//    string lineFromFile;
+//    ifstream file;
+//
+//    if(file.is_open()) {
+//        cout << "da file is open" << endl;
+//    }
+//    file.open(filename);
+//
+//    getline(file, lineFromFile); // get the template line out of the way
+//
+//    if (file.is_open()) {
+//        while (getline(file, lineFromFile)) {
+//            if (!lineFromFile.empty()) {
+//                gameObject obj = CreateObj(lineFromFile);
+//                map.insert(obj._appid, obj);
+//            }
+//        }
+//    }
+//}
