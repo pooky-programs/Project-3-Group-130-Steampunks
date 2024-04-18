@@ -19,6 +19,9 @@ struct TreeNode{
     TreeNode* right;
 
     TreeNode* parent;
+    TreeNode* uncle;
+
+    TreeNode* getUncle(TreeNode* p);
 
     TreeNode(int id, gameObject Object, int Height, TreeNode* Parent){
 		ID = id;
@@ -29,6 +32,7 @@ struct TreeNode{
 		parent = Parent;
         color = 0;
 
+        uncle = getUncle(Parent);
 	}
 
 };
@@ -43,6 +47,7 @@ private:
     //height at node
     //find black nodes
     TreeNode* add(int ID, gameObject obj);
+    bool balance(TreeNode* node);
 
 
 public:
