@@ -88,6 +88,118 @@ bool RBTree::balance(TreeNode* node){
     }
 
     //case 3: uncle is black (or nullptr), rotations necessary
+    TreeNode* p = node->parent;
+    TreeNode* g = node->parent->parent;
+    TreeNode* temp;
+    int tempColor;
+
+    //LL
+    if(g->left == p && p->left == node){
+        temp = p->right;
+        p->right = g;
+        g->left = temp;
+
+        p->parent = g->parent;
+        g->parent = p;
+
+        if(p->parent != nullptr){
+            if(p->parent->right == g){
+                p->parent->right = p;
+            }
+            else{
+                p->parent->left = p;
+            }
+        }
+
+        tempColor = p->color;
+        p->color = g->color;
+        g->color = tempColor;
+
+    }
+
+    //LR
+    if(g->left == p && p->right == node){
+        temp = node->left;
+
+        node->left = p;
+        p->parent = node;
+        p->right = temp;
+        node->parent = g;
+
+        temp = node->right;
+        node->right = g;
+        g->left = temp;
+
+        node->parent = g->parent;
+        g->parent = node;
+
+        if(node->parent != nullptr){
+            if(node->parent->right == g){
+                node->parent->right = node;
+            }
+            else{
+                node->parent->left = node;
+            }
+        }
+
+        tempColor = node->color;
+        node->color = g->color;
+        g->color = tempColor;
+    }
+
+    //RR (mirror LL)
+    if(g->right == p && p->right == node){
+        temp = p->left;
+        p->left = g;
+        g->right = temp;
+
+        p->parent = g->parent;
+        g->parent = p;
+
+        if(p->parent != nullptr){
+            if(p->parent->left == g){
+                p->parent->left = p;
+            }
+            else{
+                p->parent->right = p;
+            }
+        }
+
+        tempColor = p->color;
+        p->color = g->color;
+        g->color = tempColor;
+
+    }
+
+    //RL (Mirror LR)
+    if(g->right == p && p->left == node){
+        temp = node->right;
+
+        node->right = p;
+        p->parent = node;
+        p->left = temp;
+        node->parent = g;
+
+        temp = node->left;
+        node->left = g;
+        g->right = temp;
+
+        node->parent = g->parent;
+        g->parent = node;
+
+        if(node->parent != nullptr){
+            if(node->parent->left == g){
+                node->parent->left = node;
+            }
+            else{
+                node->parent->right = node;
+            }
+        }
+
+        tempColor = node->color;
+        node->color = g->color;
+        g->color = tempColor;
+    }
 
 }
 
