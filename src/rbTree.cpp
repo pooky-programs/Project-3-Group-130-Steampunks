@@ -3,6 +3,7 @@
 // by Joel Liston
 
 #include "rbTree.h"
+#include <iostream>
 
 TreeNode* RBTree::add(int ID, gameObject obj){
 
@@ -44,6 +45,19 @@ TreeNode* RBTree::add(int ID, gameObject obj){
 
     return nullptr;
 
+}
+
+TreeNode *RBTree::getRoot() {
+    return root;
+}
+
+void RBTree::inorder_traversal(TreeNode* node) {
+    if (node == nullptr) {
+        return;
+    }
+    inorder_traversal(node->left);
+    cout << node->object._appid << endl;
+    inorder_traversal(node->right);
 }
 
 TreeNode* TreeNode::getUncle(TreeNode* p){
@@ -214,6 +228,7 @@ bool RBTree::balance(TreeNode* node){
         g->color = tempColor;
     }
 
+    return true;
 }
 
 bool RBTree::insert(int ID, gameObject obj){
@@ -233,16 +248,17 @@ TreeNode* RBTree::searchID(int ID){
     TreeNode* current = root;
 
     while(current != nullptr){
+        int debug = current->ID;
 
         if(current->ID == ID){
             return current;
         }
         else if (current->ID < ID)
         {
-            current = current->left;
+            current = current->right;
         }
         else{
-            current = current->right;
+            current = current->left;
         }
         
     }

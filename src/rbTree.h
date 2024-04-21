@@ -51,7 +51,8 @@ private:
 
 
 public:
-
+    TreeNode* getRoot();
+    void inorder_traversal(TreeNode* node);
     bool insert(int ID, gameObject obj);
     TreeNode* searchID(int ID);
 

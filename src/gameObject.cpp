@@ -17,7 +17,6 @@ gameObject::gameObject() {
     _type = "default type";
     _genre = "default genre";
     _metacritic = -1;
-    _recommendations = -1;
     _developer = "default dev";
     _positive = -1;
     _negative = -1;
@@ -27,13 +26,12 @@ gameObject::gameObject() {
     _success = -1.0;
 }
 
-gameObject::gameObject(int appid, string name, string type, string genres, int metacritic, int recommendations, string developers, int positive, int negative, string owners, double price, int ccu) {
+gameObject::gameObject(int appid, string name, string type, string genres, int metacritic, string developers, int positive, int negative, string owners, double price, int ccu) {
     _appid = appid;
     _name = name;
     _type = type;
     _genre = genres;
     _metacritic = metacritic;
-    _recommendations = recommendations;
     _developer = developers;
     _positive = positive;
     _negative = negative;
@@ -53,14 +51,13 @@ void gameObject::PrintStats() {
     cout << "    Name: " << _name << endl;
     cout << "    Type: " << _type << endl;
     cout << "    Genre: " << _genre << endl;
-    cout << "    Price: " << "$" << _price << endl;
+    cout << "    Price: " << "$" << _price/100.00 << endl;
     cout << "    Developer: " << _developer << endl;
     cout << "    Metacritic Score: " << _metacritic << endl;
     cout << "    Number of Owners: " << _owners << endl;
     cout << "    Number of Positive Reviews: " << _positive << endl;
     cout << "    Number of Negative Reviews: " << _negative << endl;
     cout << "    Total Reviews: " << _negative + _positive << endl;
-    cout << "    Number of Recommendations: " << _recommendations << endl;
     cout << "    Concurrent Users (8/4/23): " << _ccu << endl;
     cout << "    Calculated Success Index: " << _success << endl;
 
