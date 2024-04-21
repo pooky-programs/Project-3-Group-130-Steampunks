@@ -6,8 +6,9 @@
 
 TreeNode* RBTree::add(int ID, gameObject obj){
 
-    if(root = nullptr){
+    if(root == nullptr){
         root = new TreeNode(ID, obj, 0, nullptr);
+        return root;
     }
     else{
 
@@ -18,7 +19,7 @@ TreeNode* RBTree::add(int ID, gameObject obj){
             if(current->ID == ID){
                 return nullptr;
             }
-            else if (current->ID < ID)
+            else if (current->ID > ID)
             {
                 if(current->left == nullptr){
                     current->left = new TreeNode(ID, obj, 0, current);
@@ -110,6 +111,9 @@ bool RBTree::balance(TreeNode* node){
                 p->parent->left = p;
             }
         }
+        else{
+            root = p;
+        }
 
         tempColor = p->color;
         p->color = g->color;
@@ -141,6 +145,9 @@ bool RBTree::balance(TreeNode* node){
                 node->parent->left = node;
             }
         }
+        else{
+            root = node;
+        }
 
         tempColor = node->color;
         node->color = g->color;
@@ -163,6 +170,9 @@ bool RBTree::balance(TreeNode* node){
             else{
                 p->parent->right = p;
             }
+        }
+        else{
+            root = p;
         }
 
         tempColor = p->color;
@@ -194,6 +204,9 @@ bool RBTree::balance(TreeNode* node){
             else{
                 node->parent->right = node;
             }
+        }
+        else{
+            root = node;
         }
 
         tempColor = node->color;

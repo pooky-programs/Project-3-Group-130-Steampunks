@@ -41,7 +41,7 @@ class RBTree{
 
 private:
 
-    TreeNode* root;
+    TreeNode* root = nullptr;
 
     //balance tree
     //height at node
