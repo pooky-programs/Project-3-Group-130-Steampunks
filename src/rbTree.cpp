@@ -2,7 +2,7 @@
 // 4/7/2024
 // by Joel Liston
 
-#include "rbTree.h";
+#include "rbTree.h"
 
 TreeNode* RBTree::add(int ID, gameObject obj){
 
