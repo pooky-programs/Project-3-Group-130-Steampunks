@@ -58,7 +58,7 @@ void gameObject::PrintStats() {
     cout << "    Number of Positive Reviews: " << _positive << endl;
     cout << "    Number of Negative Reviews: " << _negative << endl;
     cout << "    Total Reviews: " << _negative + _positive << endl;
-    cout << "    Concurrent Users (8/4/23): " << _ccu << endl;
+    cout << "    Concurrent Users (4/20/24): " << _ccu << endl;
     cout << "    Calculated Success Index: " << _success << endl;
 
 
