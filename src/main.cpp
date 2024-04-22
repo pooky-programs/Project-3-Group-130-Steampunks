@@ -12,12 +12,12 @@
 #include <algorithm>
 #include "gameObject.h"
 #include "hashMap.h"
-//#include "RBTree.h"
+#include "rbTree.h"
 
 using namespace std;
 
 void ReadFileHashMap(const char* filename, HashMap &map, set<string> &genre);
-//void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre);
+void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre);
 gameObject CreateObj(string &lineFromFile);
 void printDecendingOrderHM(string targetGenre, HashMap &map);
 bool checkInteger(string str);
@@ -30,8 +30,7 @@ double correctTokenDouble(string uncheckedToken);
 
 int main() {
 
-    const char* file = "data/steamspy.csv";
-    const char* file2 = "final_data.csv";
+    const char* file2 = "../data/final_data.csv";
     set<string> genres;
     map<int, string> genresMap;
 
@@ -46,8 +45,9 @@ int main() {
 
     HashMap myHashMap;
     ReadFileHashMap(file2, myHashMap, genres);
-//    RBTree myRBTree;
-//    ReadFileRBTree(file2, myRBTree, genres);
+    RBTree myRBTree;
+    ReadFileRBTree(file2, myRBTree, genres);
+//    myRBTree.inorder_traversal(myRBTree.getRoot());
     bool weContinue = true;
     while (weContinue) {
         cout << endl << "Type one of the following numbers to browse the games from that genre. Type -1 to exit the program." << endl << endl;
@@ -74,6 +74,7 @@ int main() {
                 weContinue = false;
                 cout << endl;
                 cout << "Thank you for using the Steampunks' Trend Analyzer!" << endl;
+                return 0;
             }
             else if (!foundKey(choice, genresMap)) {
                 cout << "The integer you entered was not available in the list. Try again." << endl;
@@ -87,7 +88,7 @@ int main() {
         cout << "Success index: # of positive reviews / # of all reviews." << endl;
         cout << "Games in the " << targetGenre << " genre sorted by success index: " << endl;
 
-        cout << "AppID " << setw(10) << " | "  << "Name" << setw(79) << "| " << setw(10) << "Success Index" << " | " << endl;
+        cout << "AppID  " << setw(10) << " | "  << "Name" << setw(79) << "| " << setw(10) << "Success Index" << " | " << endl;
 
         printDecendingOrderHM(targetGenre, myHashMap);
 
@@ -139,15 +140,15 @@ int main() {
                 }
             }
             else { // if retrieving through red-black tree
-//                if (!myRBTree.search(choice)) {
-//                    cout << "No game was found with that AppID. Try again." << endl;
-//                }
-//                else {
-//                    auto tempRB = myRBTree.search(choice);
-//                    blanky = tempRB->game;
-//                    blanky.PrintStats();
-//                    cout << endl;
-//                }
+                if (myRBTree.searchID(choice) == nullptr) {
+                    cout << "No game was found with that AppID. Try again." << endl;
+                }
+                else {
+                    auto tempRB = myRBTree.searchID(choice);
+                    blanky = tempRB->object; // the game
+                    blanky.PrintStats();
+                    cout << endl;
+                }
             }
 
 
@@ -264,10 +265,6 @@ gameObject CreateObj(string &lineFromFile) {
     int metacritic = correctTokenInt(token);
 
     getline(stream, token, ',');
-
-    int recommendations = correctTokenInt(token);
-
-    getline(stream, token, ',');
     if (token[0] == '\"') {
         string fulldev = "";
         token = token.substr(1);
@@ -314,7 +311,7 @@ gameObject CreateObj(string &lineFromFile) {
     int ccu = correctTokenInt(token);
 
 
-    gameObject* game = new gameObject(appid,name,type,genres,metacritic,recommendations,developers,positive,negative,owners,price,ccu);
+    gameObject* game = new gameObject(appid,name,type,genres,metacritic,developers,positive,negative,owners,price,ccu);
 
     return *game;
 }
@@ -334,26 +331,29 @@ void ReadFileHashMap(const char* filename, HashMap &map, set<string> &genre) {
             }
         }
     }
+    else {
+        cout << "Could not load from file: Hashmap" << endl;
+    }
 }
 
-//void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre) {
-//    // Read the file, create and store some game objects
-//    string lineFromFile;
-//    ifstream file;
-//
-//    if(file.is_open()) {
-//        cout << "da file is open" << endl;
-//    }
-//    file.open(filename);
-//
-//    getline(file, lineFromFile); // get the template line out of the way
-//
-//    if (file.is_open()) {
-//        while (getline(file, lineFromFile)) {
-//            if (!lineFromFile.empty()) {
-//                gameObject obj = CreateObj(lineFromFile);
-//                map.insert(obj._appid, obj);
-//            }
-//        }
-//    }
-//}
+void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre) {
+    // Read the file, create and store some game objects
+    string lineFromFile;
+    ifstream file;
+
+    file.open(filename);
+
+    getline(file, lineFromFile); // get the template line out of the way
+
+    if (file.is_open()) {
+        while (getline(file, lineFromFile)) {
+            if (!lineFromFile.empty()) {
+                gameObject obj = CreateObj(lineFromFile);
+                map.insert(obj._appid, obj);
+            }
+        }
+    }
+    else {
+        cout << "Could not load from file: RBTree" << endl;
+    }
+}

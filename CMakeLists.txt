@@ -23,6 +23,7 @@ add_executable(Main
         src/main.cpp # your main file
         src/gameObject.h src/gameObject.cpp
         src/hashMap.h src/hashMap.cpp
+        src/rbTree.h src/rbTree.cpp
         )
 
 # These tests can use the Catch2-provided main
