@@ -30,7 +30,7 @@ double correctTokenDouble(string uncheckedToken);
 
 int main() {
 
-    const char* file2 = "../data/merged_data_test.csv";
+    const char* file2 = "../data/final_data.csv";
     set<string> genres;
     map<int, string> genresMap;
 
@@ -74,6 +74,7 @@ int main() {
                 weContinue = false;
                 cout << endl;
                 cout << "Thank you for using the Steampunks' Trend Analyzer!" << endl;
+                return 0;
             }
             else if (!foundKey(choice, genresMap)) {
                 cout << "The integer you entered was not available in the list. Try again." << endl;
@@ -331,7 +332,7 @@ void ReadFileHashMap(const char* filename, HashMap &map, set<string> &genre) {
         }
     }
     else {
-        cout << "file not open?? whwa" << endl;
+        cout << "Could not load from file: Hashmap" << endl;
     }
 }
 
@@ -353,6 +354,6 @@ void ReadFileRBTree(const char* filename, RBTree &map, set<string> &genre) {
         }
     }
     else {
-        cout << "file not open?? whwa" << endl;
+        cout << "Could not load from file: RBTree" << endl;
     }
 }
