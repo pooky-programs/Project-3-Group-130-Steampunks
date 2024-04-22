@@ -1,6 +1,7 @@
 COP3530 Project 3 README
 Steampunks
 
+
 Current Team Members:
 
   Joel Liston
@@ -17,9 +18,11 @@ Previous Team Members:
   Jonathan Kennel
 
 
+
 The aim of this project will be to provide game publishers or developers with information regarding current trends. This allows for informed decision making regarding game planning, and allows one to observe trends in genre popularity, prices, and other sets of information as it relates to average user reviews.
 
 To run the project, use the CMakeLists.txt configuration file, and run main. Make sure that final_data.csv is in the data folder before you start, as this is the dataset our application uses.
+
 
 References:
 
