@@ -1,23 +1,23 @@
 COP3530 Project 3 README
 Steampunks
 
+[Video Presentation](https://youtu.be/_K7bN9taIhY)
+
 ---
 
 Current Team Members:
 
-  Joel Liston
+-  Joel Liston
   
-  Serafina Myers
-  
----
+-  Serafina Myers
 
 Previous Team Members:
 
-  Austin Rhee
+-  Austin Rhee
   
-  Serafina Myers
+-  Serafina Myers
   
-  Jonathan Kennel
+-  Jonathan Kennel
 
 ---
 
@@ -38,7 +38,7 @@ References:
     https://steamcommunity.com/dev 
 
 
-  ---
+  
   Tracked Data Points:
 
     Appid - Unique identifier for each item.
